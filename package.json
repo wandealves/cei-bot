@@ -1,0 +1,21 @@
+{
+  "name": "cei-bot",
+  "version": "1.0.0",
+  "description": "Crawler para ler dados do Canal Eletrônico do Investidor",
+  "main": "index.js",
+  "repository": "https://github.com/wandealves/cei-bot.git",
+  "author": "wanderson <wanderson.alves.rodrigues@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.11.1",
+    "@typescript-eslint/parser": "^4.11.1",
+    "eslint": "^7.16.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.0",
+    "prettier": "^2.2.1",
+    "typescript": "^4.1.3"
+  }
+}
