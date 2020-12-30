@@ -1,0 +1,12 @@
+{
+  "App": {
+        "cei": {
+              "url": "https://ceiapp.b3.com.br/CEI_Responsivo/login.aspx",
+              "headless": false,
+              "tags":{
+                "login": "'ctl00$ContentPlaceHolder1$txtLogin'",
+                "password": "'ctl00$ContentPlaceHolder1$txtSenha'"
+              }
+        }
+  }
+}
