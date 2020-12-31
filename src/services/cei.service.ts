@@ -1,13 +1,10 @@
 import puppeteer from 'puppeteer';
-import config from 'config';
 
 import Cei from '../models/cei';
+import DividendService from './dividend.service';
 import BusinessError from '../util/errors/business.error';
+import Config from '../constant/config';
 
-interface Item {
-  id: string;
-  name: string;
-}
 export default class CeiService {
   private page: puppeteer.Page;
 
@@ -17,7 +14,7 @@ export default class CeiService {
 
   public async startAsync(): Promise<void> {
     this.browser = await puppeteer.launch({
-      headless: config.get('App.cei.headless'),
+      headless: Config.HEADLESS,
     });
     this.page = await this.browser.newPage();
   }
@@ -32,19 +29,17 @@ export default class CeiService {
 
     await this.startAsync();
 
-    await this.page.goto(config.get('App.cei.url'));
+    await this.page.goto(Config.URL_LOGIN);
 
+    await this.page.type(`[name=${Config.TAG.TEXT_LOGIN}]`, this.cei.login, {
+      delay: Config.DELAY,
+    });
     await this.page.type(
-      `[name=${config.get('App.cei.tags.login')}]`,
-      this.cei.login,
-      { delay: config.get('App.cei.delay') },
-    );
-    await this.page.type(
-      `[name=${config.get('App.cei.tags.password')}]`,
+      `[name=${Config.TAG.TEXT_PASSWORD}]`,
       this.cei.password,
-      { delay: config.get('App.cei.delay') },
+      { delay: Config.DELAY },
     );
-    this.page.click(`[name=${config.get('App.cei.tags.btnLogin')}]`);
+    this.page.click(`[name=${Config.TAG.BTN_LOGIN}]`);
 
     await this.page.waitForSelector(`#ctl00_Breadcrumbs_lblTituloPagina`, {
       timeout: 120000,
@@ -69,7 +64,7 @@ export default class CeiService {
     //
   }
 
-  public async earnings(): Promise<void> {
+  /* public async dividends(): Promise<void> {
     await this.loginAsync();
     await this.page.goto(config.get('App.cei.earningUrl'));
     await this.page.waitForSelector(
@@ -94,5 +89,12 @@ export default class CeiService {
       '3',
     );
     console.log(institutions);
+  } */
+
+  public async dividends(): Promise<void> {
+    await this.loginAsync();
+
+    const dividendService = new DividendService(this.page);
+    await dividendService.getAsync();
   }
 }
