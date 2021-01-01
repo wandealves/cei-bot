@@ -12,6 +12,7 @@ module.exports = {
   ],
   plugins: [
     'babel-plugin-transform-typescript-metadata',
+    ["@babel/plugin-transform-typescript", { "allowNamespaces": true }],
     [
       '@babel/plugin-proposal-decorators',
       {
