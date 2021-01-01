@@ -10,6 +10,8 @@ export default class Config {
 
   public static DELAY = 300;
 
+  public static TIMEOUTRESPONSE = { timeout: 8 * 1000 };
+
   public static TAG = class {
     public static TEXT_LOGIN = "'ctl00$ContentPlaceHolder1$txtLogin'";
 
