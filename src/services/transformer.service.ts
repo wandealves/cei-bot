@@ -33,4 +33,12 @@ export default class TransformeService {
 
     return value;
   }
+
+  public static replaceLogin(login: string): string {
+    if (login) {
+      return login.replace('-', '').replace('.', '').replace('/', '');
+    }
+
+    return login;
+  }
 }

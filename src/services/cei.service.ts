@@ -2,6 +2,7 @@ import puppeteer from 'puppeteer';
 
 import Cei from '../dtos/cei';
 import IncomeService from './income.service';
+import TransformeService from './transformer.service';
 import BusinessError from '../util/errors/business.error';
 import Setting from '../util/setting';
 import Config from '../constant/config';
@@ -32,9 +33,13 @@ export default class CeiService {
 
     await this.page.goto(Config.URL_LOGIN);
 
-    await this.page.type(`[name=${Config.TAG.TEXT_LOGIN}]`, this.cei.login, {
-      delay: this.setting ? this.setting.delay : Config.DELAY,
-    });
+    await this.page.type(
+      `[name=${Config.TAG.TEXT_LOGIN}]`,
+      TransformeService.replaceLogin(this.cei.login),
+      {
+        delay: this.setting ? this.setting.delay : Config.DELAY,
+      },
+    );
     await this.page.type(
       `[name=${Config.TAG.TEXT_PASSWORD}]`,
       this.cei.password,
@@ -49,7 +54,7 @@ export default class CeiService {
     });
   }
 
-  public async GetIncome(): Promise<void> {
+  public async GetIncomeAsync(): Promise<void> {
     await this.loginAsync();
 
     const incomeService = new IncomeService(this.page, this.setting);

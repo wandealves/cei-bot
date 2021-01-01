@@ -7,7 +7,7 @@ export default class Setting {
 
   constructor(headless: boolean, delay: number, timeout: number) {
     this.headless = headless;
-    this.delay = delay === 0 ? 100 : delay;
-    this.timeout = timeout === 0 ? 100 : timeout;
+    this.delay = delay === 0 ? 300 : delay;
+    this.timeout = timeout === 0 ? 300 : timeout;
   }
 }
