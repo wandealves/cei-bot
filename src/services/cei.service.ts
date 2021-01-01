@@ -1,5 +1,7 @@
 import puppeteer from 'puppeteer';
 
+import Cei from '../dtos/cei';
+import IncomeResult from '../dtos/incomeResult';
 import IncomeService from './income.service';
 import TransformeService from './transformer.service';
 import BusinessError from '../util/errors/business.error';
@@ -12,18 +14,14 @@ export class CeiService {
 
   private browser: puppeteer.Browser;
 
-  constructor(
-    public login: string,
-    public password: string,
-    public setting?: Setting,
-  ) {}
+  constructor(public cei: Cei, public setting?: Setting) {}
 
-  public async getIncomeAsync(): Promise<void> {
-    await this.loginAsync(this.login, this.password);
+  public async getIncomeAsync(): Promise<IncomeResult[]> {
+    await this.loginAsync(this.cei.login, this.cei.password);
     const incomeService = new IncomeService(this.page, this.setting);
     const results = await incomeService.executeAsync();
-    console.log(JSON.stringify(results, null, 2));
     await this.closeAsync();
+    return results;
   }
 
   private async startAsync(setting?: Setting): Promise<void> {
