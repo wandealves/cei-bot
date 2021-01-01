@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 
-import Item from '../models/item';
+import Item from '../dtos/item';
 
 export default class EvaluateService {
   public static async getItemsAsync(

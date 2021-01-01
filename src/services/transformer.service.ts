@@ -19,4 +19,18 @@ export default class TransformeService {
 
     return tag;
   }
+
+  public static parseNumber(value: any, tag: string): any | number {
+    if (
+      value &&
+      (tag === Transforme.TO.GROSSVALUE ||
+        tag === Transforme.TO.NETVALUE ||
+        tag === Transforme.TO.QUANTItY ||
+        tag === Transforme.TO.QUOTATIONFACTOR)
+    ) {
+      return parseFloat(value);
+    }
+
+    return value;
+  }
 }
