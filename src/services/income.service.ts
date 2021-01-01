@@ -51,6 +51,7 @@ export default class IncomeService {
         const incomeResult = this.createIncomeResult(
           [],
           brokerName,
+          institutionId,
           Status.NotFound,
           [],
         );
@@ -110,11 +111,13 @@ export default class IncomeService {
   private createIncomeResult(
     datas: Income[],
     brokerName: string,
+    brokerCode: string,
     status: Status,
     erros: string[],
   ): IncomeResult {
     const incomeResult: IncomeResult = new IncomeResult();
     incomeResult.brokerName = brokerName;
+    incomeResult.brokerCode = brokerCode;
     incomeResult.status = status;
     incomeResult.incomeList = datas;
     incomeResult.errors = erros;
