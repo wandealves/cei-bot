@@ -12,7 +12,8 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
-    "sourceMap": true,
+    "sourceMap": false,
+    "declaration": true
   },
   "include": ["src/**/*"],
   "exclude": [
