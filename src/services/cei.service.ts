@@ -1,32 +1,48 @@
 import puppeteer from 'puppeteer';
 
-import Cei from '../dtos/cei';
 import IncomeService from './income.service';
 import TransformeService from './transformer.service';
 import BusinessError from '../util/errors/business.error';
 import Setting from '../util/setting';
 import Config from '../constant/config';
 
-export default class CeiService {
+/* eslint-disable import/prefer-default-export */
+export class CeiService {
   private page: puppeteer.Page;
 
   private browser: puppeteer.Browser;
 
-  constructor(public cei: Cei, public setting?: Setting) {}
+  constructor(
+    public login: string,
+    public password: string,
+    public setting?: Setting,
+  ) {}
 
-  public async startAsync(): Promise<void> {
+  public async getIncomeAsync(): Promise<void> {
+    await this.loginAsync(this.login, this.password);
+    const incomeService = new IncomeService(this.page, this.setting);
+    const results = await incomeService.executeAsync();
+    console.log(JSON.stringify(results, null, 2));
+    await this.closeAsync();
+  }
+
+  private async startAsync(setting?: Setting): Promise<void> {
     this.browser = await puppeteer.launch({
-      headless: this.setting ? this.setting.headless : Config.HEADLESS,
+      headless: setting ? setting.headless : Config.HEADLESS,
     });
     this.page = await this.browser.newPage();
   }
 
-  public async closeAsync(): Promise<void> {
+  private async closeAsync(): Promise<void> {
     if (this.browser) await this.browser.close();
   }
 
-  public async loginAsync(): Promise<void> {
-    if (!this.cei.login || !this.cei.password)
+  private async loginAsync(
+    login: string,
+    password: string,
+    setting?: Setting,
+  ): Promise<void> {
+    if (!login || !password)
       throw new BusinessError(`Enter login and password`);
 
     await this.startAsync();
@@ -35,31 +51,18 @@ export default class CeiService {
 
     await this.page.type(
       `[name=${Config.TAG.TEXT_LOGIN}]`,
-      TransformeService.replaceLogin(this.cei.login),
+      TransformeService.replaceLogin(login),
       {
-        delay: this.setting ? this.setting.delay : Config.DELAY,
+        delay: setting ? setting.delay : Config.DELAY,
       },
     );
-    await this.page.type(
-      `[name=${Config.TAG.TEXT_PASSWORD}]`,
-      this.cei.password,
-      { delay: this.setting ? this.setting.delay : Config.DELAY },
-    );
+    await this.page.type(`[name=${Config.TAG.TEXT_PASSWORD}]`, password, {
+      delay: setting ? setting.delay : Config.DELAY,
+    });
     this.page.click(`[name=${Config.TAG.BTN_LOGIN}]`);
 
     await this.page.waitForSelector(`#ctl00_Breadcrumbs_lblTituloPagina`, {
-      timeout: this.setting
-        ? this.setting.timeout
-        : Config.TIMEOUTRESPONSE.timeout,
+      timeout: setting ? setting.timeout : Config.TIMEOUTRESPONSE.timeout,
     });
-  }
-
-  public async GetIncomeAsync(): Promise<void> {
-    await this.loginAsync();
-
-    const incomeService = new IncomeService(this.page, this.setting);
-    const results = await incomeService.executeAsync();
-    console.log(JSON.stringify(results, null, 2));
-    await this.closeAsync();
   }
 }
