@@ -6,10 +6,11 @@ import IncomeResult from '../dtos/incomeResult';
 import Status from '../dtos/status';
 import EvaluateService from './evaluate.service';
 import TransformeService from './transformer.service';
+import Setting from '../util/setting';
 import Config from '../constant/config';
 
 export default class IncomeService {
-  constructor(public page: puppeteer.Page) {}
+  constructor(public page: puppeteer.Page, public setting?: Setting) {}
 
   public async executeAsync(): Promise<IncomeResult[]> {
     await this.page.goto(Config.URL_DIVIDEND);
@@ -19,8 +20,8 @@ export default class IncomeService {
       this.page,
       `[name=${Config.TAG.SLC_INSTITUTION}]`,
     );
-    const yieldResult = await this.filterDataAsync(this.page, institutions);
-    return yieldResult;
+    const incomeResult = await this.filterDataAsync(this.page, institutions);
+    return incomeResult;
   }
 
   private async filterDataAsync(
@@ -60,7 +61,9 @@ export default class IncomeService {
           `${institutionId}`,
         );
         await page.click(`[name=${Config.TAG.BTN_DIVIDEND}]`);
-        await page.waitForTimeout(Config.TIMEOUTRESPONSE.timeout);
+        await page.waitForTimeout(
+          this.setting ? this.setting.timeout : Config.TIMEOUTRESPONSE.timeout,
+        );
 
         datas = await this.transformDataAsync(page);
         if (datas && datas.length > 0) {
