@@ -26,6 +26,8 @@ export default class Config {
     public static LABEL_ID_DIVIDEND =
       '#ctl00_ContentPlaceHolder1_rptAgenteProventos_ctl00_lblAgenteProventos';
 
+    public static LABEL_ID_BREADCRUMB = '#ctl00_Breadcrumbs_lblTituloPagina';
+
     public static TABLE_HEADER_DIVIDEND = '.responsive > thead > tr > th';
 
     public static TABLE_BODY_DIVIDEND = '.responsive > tbody > tr';
