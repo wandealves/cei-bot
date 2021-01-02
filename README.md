@@ -26,7 +26,11 @@ yarn add cei-bot
 - `password`: Senha de acesso ao CEI;
 - `settings`: Configurações para controle da interação com a página do CEI;
 
+## Typescript
+
 ```javascript
+import { CeiService } from 'cei-bot';
+
 const ceiService = new CeiService(
   {
     login: 'username',
@@ -36,6 +40,51 @@ const ceiService = new CeiService(
     /*settings*/
   },
 );
+(async () => {
+  await ceiService.getIncomeAsync();
+})();
+```
+
+## Javascript
+
+```javascript
+const CeiService = require('cei-bot').CeiService;
+
+const ceiService = new CeiService(
+  {
+    login: 'username',
+    password: 'password',
+  },
+  {
+    /*settings*/
+  },
+);
+
+service.getIncomeAsync().then(data => {
+  console.log(data);
+});
+```
+
+## Settings
+
+```javascript
+import { CeiService } from 'cei-bot';
+
+const ceiService = new CeiService(
+  {
+    login: 'username',
+    password: 'password',
+  },
+  {
+    headless: false,
+    delay: 200,
+    timeout: 400,
+  },
+);
+
+(async () => {
+  await ceiService.getIncomeAsync();
+})();
 ```
 
 2. Obtenção dos Rendimentos
