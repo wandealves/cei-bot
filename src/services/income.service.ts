@@ -63,7 +63,7 @@ export default class IncomeService {
         );
         await page.click(`[name=${Config.TAG.BTN_DIVIDEND}]`);
         await page.waitForTimeout(
-          this.setting ? this.setting.timeout : Config.TIMEOUTRESPONSE.timeout,
+          this.setting?.timeout || Config.TIMEOUTRESPONSE.timeout,
         );
 
         datas = await this.transformDataAsync(page);
