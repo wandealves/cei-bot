@@ -20,13 +20,13 @@ yarn add cei-bot
 
 ## Utilização
 
-1. Crie uma instância do `CeiService` passando com os seguintes parametros:
+1. **Crie uma instância do `CeiService` passando com os seguintes parametros:**
 
 - `login`: Usuário de entrada no CEI que pode ser o CPF ou CNPJ;
 - `password`: Senha de acesso ao CEI;
 - `settings`: Configurações para controle da interação com a página do CEI;
 
-## Typescript
+### a - Typescript
 
 ```javascript
 import { CeiService } from 'cei-bot';
@@ -45,7 +45,7 @@ const ceiService = new CeiService(
 })();
 ```
 
-## Javascript
+### b - Javascript
 
 ```javascript
 const CeiService = require('cei-bot').CeiService;
@@ -65,7 +65,7 @@ service.getIncomeAsync().then(data => {
 });
 ```
 
-## Settings
+### c - Settings
 
 ```javascript
 import { CeiService } from 'cei-bot';
@@ -87,7 +87,7 @@ const ceiService = new CeiService(
 })();
 ```
 
-2. Obtenção dos Rendimentos
+2. **Obtenção dos Rendimentos**
 
 Lembrando que o processo de obtenção e assíncrona.
 
@@ -222,10 +222,10 @@ Resultado:
 ## Features
 
 - [x] Rendiemntos
-- [] Histórico de ações
-- [] Carteira de ações
-- [] Tesouro Direto (Resumido)
-- [] Tesouro Direto (Analítico)
+- [ ] Histórico de ações
+- [ ] Carteira de ações
+- [ ] Tesouro Direto (Resumido)
+- [ ] Tesouro Direto (Analítico)
 
 ## Licença
 
