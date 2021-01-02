@@ -1,9 +1,9 @@
 export default class Setting {
-  public headless: boolean;
+  public headless?: boolean;
 
-  public delay: number;
+  public delay?: number;
 
-  public timeout: number;
+  public timeout?: number;
 
   constructor(headless: boolean, delay: number, timeout: number) {
     this.headless = headless;
