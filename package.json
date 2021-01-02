@@ -16,7 +16,9 @@
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "build:types": "tsc -d --declarationDir dist --declarationMap --emitDeclarationOnly",
+    "build:prd": "yarn build && yarn build:types",
     "dev:exec": "ts-node-dev -r tsconfig-paths/register  --inspect --transpile-only --ignore-watch node_modules src/index.ts",
+    "dev:clean": "rimraf esm dist",
     "prd:exec": "node dist/index.js",
     "start": "ts-node src/index.ts"
   },
