@@ -13,7 +13,7 @@ O `cei-bot` utiliza a seguinte dependência:
 Basta instalar utilizando o NPM:
 
 ```
-npm install --save cei-bot
+npm i cei-bot
 ou
 yarn add cei-bot
 ```
@@ -31,17 +31,14 @@ yarn add cei-bot
 ```javascript
 import { CeiService } from 'cei-bot';
 
-const ceiService = new CeiService(
-  {
-    login: 'username',
-    password: 'password',
-  },
-  {
-    /*settings*/
-  },
-);
+const ceiService = new CeiService({
+  login: 'username',
+  password: 'password',
+});
+
 (async () => {
-  await ceiService.getIncomeAsync();
+  const data = await ceiService.getIncomeAsync();
+  console.log(JSON.stringify(data, null, 2));
 })();
 ```
 
@@ -50,18 +47,13 @@ const ceiService = new CeiService(
 ```javascript
 const CeiService = require('cei-bot').CeiService;
 
-const ceiService = new CeiService(
-  {
-    login: 'username',
-    password: 'password',
-  },
-  {
-    /*settings*/
-  },
-);
+const ceiService = new CeiService({
+  login: 'username',
+  password: 'password',
+});
 
-service.getIncomeAsync().then(data => {
-  console.log(data);
+ceiService.getIncomeAsync().then(data => {
+  console.log(JSON.stringify(data, null, 2));
 });
 ```
 
@@ -83,7 +75,8 @@ const ceiService = new CeiService(
 );
 
 (async () => {
-  await ceiService.getIncomeAsync();
+  const data = await ceiService.getIncomeAsync();
+  console.log(JSON.stringify(data, null, 2));
 })();
 ```
 
@@ -92,17 +85,16 @@ const ceiService = new CeiService(
 Lembrando que o processo de obtenção e assíncrona.
 
 ```javascript
-const ceiService = new CeiService(
-  {
-    login: 'username',
-    password: 'password',
-  },
-  {
-    /*settings*/
-  },
-);
+const CeiService = require('cei-bot').CeiService;
 
-const resuls = await ceiService.GetIncomeAsync();
+const ceiService = new CeiService({
+  login: 'username',
+  password: 'password',
+});
+
+ceiService.getIncomeAsync().then(data => {
+  console.log(JSON.stringify(data, null, 2));
+});
 ```
 
 ## Settings

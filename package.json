@@ -1,12 +1,18 @@
 {
   "name": "cei-bot",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "description": "Crawler para ler dados do Canal Eletrônico do Investidor",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/wandealves/cei-bot.git",
   "author": "wanderson <wanderson.alves.rodrigues@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "cei",
+    "bot",
+    "acoes",
+    "investimentos"
+  ],
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "build:types": "tsc -d --declarationDir dist --declarationMap --emitDeclarationOnly",
