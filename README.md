@@ -1,6 +1,6 @@
 # cei-bot 💸
 
-Crawler para ler dados do Canal Eletrônico do Investidor, a principal funcionalidade desse projeto é obter dados do CEI - Canal Eletrônico do Investidor e tranformá-lo em informações que possam ser consumidos por outras aplicações.
+Bot para ler dados do Canal Eletrônico do Investidor, a principal funcionalidade desse projeto é obter dados do CEI - Canal Eletrônico do Investidor e tranformá-lo em informações que possam ser consumidos por outras aplicações.
 
 ## Dependências
 
@@ -133,8 +133,8 @@ Resultado:
         eventType: 'DIVIDENDO',
         quantity: 100,
         quotationFactor: 1,
-        grossValue: 50.0,
-        netValue: 50.0,
+        grossValue: 50.06,
+        netValue: 50,
       },
       {
         active: 'Ação 02',
@@ -144,8 +144,8 @@ Resultado:
         eventType: 'DIVIDENDO',
         quantity: 118,
         quotationFactor: 1,
-        grossValue: 80.0,
-        netValue: 80.0,
+        grossValue: 80.01,
+        netValue: 80,
       },
       {
         active: 'Ação 03',
@@ -155,8 +155,8 @@ Resultado:
         eventType: 'JUROS SOBRE CAPITAL PRÓPRIO',
         quantity: 118,
         quotationFactor: 1,
-        grossValue: 25,
-        netValue: 21,
+        grossValue: 25.04,
+        netValue: 21.13,
       },
       {
         active: 'Ação 04',
@@ -166,8 +166,8 @@ Resultado:
         eventType: 'RENDIMENTO',
         quantity: 29,
         quotationFactor: 1,
-        grossValue: 34,
-        netValue: 34,
+        grossValue: 34.87,
+        netValue: 34.06,
       },
     ],
   },
