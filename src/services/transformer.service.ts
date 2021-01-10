@@ -1,4 +1,5 @@
 import Transforme from '../constant/transforme';
+import ConvertNumber from '../util/convertNumber';
 
 export default class TransformeService {
   public static fromTo(tag: string): string {
@@ -28,7 +29,7 @@ export default class TransformeService {
         tag === Transforme.TO.QUANTItY ||
         tag === Transforme.TO.QUOTATIONFACTOR)
     ) {
-      return parseFloat(value);
+      return ConvertNumber.currency(value);
     }
 
     return value;
