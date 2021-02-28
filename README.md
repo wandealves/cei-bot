@@ -97,6 +97,23 @@ ceiService.getIncomeAsync().then(data => {
 });
 ```
 
+3. **Obtenção carteira de ativos**
+
+Lembrando que o processo de obtenção e assíncrona.
+
+```javascript
+const CeiService = require('cei-bot').CeiService;
+
+const ceiService = new CeiService({
+  login: 'username',
+  password: 'password',
+});
+
+ceiService.getPortfolioAsync().then(data => {
+  console.log(JSON.stringify(data, null, 2));
+});
+```
+
 ## Settings
 
 | Propriedade  | Tipo      | Default | Descrição                                                                                                                                 |
