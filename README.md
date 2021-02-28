@@ -84,6 +84,8 @@ const ceiService = new CeiService(
 
 Lembrando que o processo de obtenção e assíncrona.
 
+a - Javascript
+
 ```javascript
 const CeiService = require('cei-bot').CeiService;
 
@@ -97,9 +99,25 @@ ceiService.getIncomeAsync().then(data => {
 });
 ```
 
+b - TypeScript
+
+```javascript
+import { CeiService } from 'cei-bot';
+
+const ceiService = new CeiService({
+  login: 'username',
+  password: 'password',
+});
+
+const data = await ceiService.getIncomeAsync();
+console.log(JSON.stringify(data, null, 2));
+```
+
 3. **Obtenção carteira de ativos**
 
 Lembrando que o processo de obtenção e assíncrona.
+
+a - Javascript
 
 ```javascript
 const CeiService = require('cei-bot').CeiService;
@@ -114,6 +132,20 @@ ceiService.getPortfolioAsync().then(data => {
 });
 ```
 
+b - TypeScript
+
+```javascript
+import { CeiService } from 'cei-bot';
+
+const ceiService = new CeiService({
+  login: 'username',
+  password: 'password',
+});
+
+const data = await ceiService.getPortfolioAsync();
+console.log(JSON.stringify(data, null, 2));
+```
+
 ## Settings
 
 | Propriedade  | Tipo      | Default | Descrição                                                                                                                                 |
@@ -126,10 +158,10 @@ ceiService.getPortfolioAsync().then(data => {
 
 #### GetIncomeAsync()
 
-Retorna os dados os rendiemntos do mês no CEI.
+Retorna os dados os rendiementos do mês no CEI.
 
 ```javascript
-const resuls = await ceiService.GetIncomeAsync();
+const resuls = await ceiService.getIncomeAsync();
 ```
 
 Resultado:
@@ -228,13 +260,109 @@ Resultado:
 | **grossValue**      | _Number_ | Valor Bruto (R$) do rendimento do ativo.                                               |
 | **netValue**        | _Number_ | Valor líquido (R$) do rendimento do ativo.                                             |
 
+#### GetPortfolioAsync()
+
+Retorna os dados da carteira de ativos do mês no CEI.
+
+```javascript
+const resuls = await ceiService.getPortfolioAsync();
+```
+
+Resultado:
+
+```javascript
+[
+  {
+    status: 'S',
+    errors: [],
+    brokerName: "100 - Corretora 100'",
+    brokerCode: '100',
+    portfolioList: [
+      {
+        company: 'Empresa 01',
+        specification: 'CI',
+        code: 'ABC01',
+        codISIN: 'BRBABC01',
+        price: '110,10',
+        quantity: '60',
+        quotationFactor: 1,
+        grossValue: '2.100,10',
+      },
+      {
+        company: 'Empresa 02',
+        specification: 'ON NM',
+        code: 'CCC02',
+        codISIN: 'BRECCC02',
+        price: '40,60',
+        quantity: '200',
+        quotationFactor: 1,
+        grossValue: '5.000,70',
+      },
+      {
+        company: 'Empresa 03',
+        specification: 'ON NM',
+        code: 'CCC03',
+        codISIN: 'BRECCC03',
+        price: '60,60',
+        quantity: '700',
+        quotationFactor: 1,
+        grossValue: '1.000,10',
+      },
+      {
+        company: 'Empresa 04',
+        specification: 'ON NM',
+        code: 'CCC04',
+        codISIN: 'BRECCC04',
+        price: '15,60',
+        quantity: '600',
+        quotationFactor: 1,
+        grossValue: '10.000,70',
+      },
+    ],
+  },
+  {
+    status: 'N',
+    errors: [],
+    brokerName: 'Empresa 02',
+    brokerCode: '200',
+    portfolioList: [],
+  },
+  {
+    status: 'N',
+    errors: [],
+    brokerName: 'Empresa 03',
+    brokerCode: '300',
+    portfolioList: [],
+  },
+];
+```
+
+- brokerName = Nome da corretora;
+
+- brokerCode = Código da corretora;
+
+- status = Situação do retorno que pode ser S para Sucesso, E paea Erro e N para resposta não encontrada. Quando S representa que obteve dados do CEI se N significa não existem informações para a corretora;
+
+- errors = Lista de erros em formato de String;
+- portfolioList = Lista com todos os ativos da sua carteira encontrado no CEI;
+
+## Portfolio List
+
+| Propriedade         | Tipo     | Descrição                                                               |
+| ------------------- | -------- | ----------------------------------------------------------------------- |
+| **company**         | _String_ | Nome da empresa .                                                       |
+| **specification**   | _String_ | Especificação da ação se é Ações ordinárias (ON) ou preferenciais (PN). |
+| **code**            | _String_ | Código de negociação do ativo.                                          |
+| **codISIN**         | _String_ | International Securities Identification Number.                         |
+| **price**           | _Number_ | Preço do ativo.                                                         |
+| **quantity**        | _Number_ | Quantidade do ativo na carteira.                                        |
+| **quotationFactor** | _Number_ | Fator da cotação.                                                       |
+| **grossValue**      | _Number_ | Valor Bruto (R$) do rendimento do ativo.                                |
+
 ## Features
 
 - [x] Rendiemntos
-- [ ] Histórico de ações
-- [ ] Carteira de ações
-- [ ] Tesouro Direto (Resumido)
-- [ ] Tesouro Direto (Analítico)
+- [x] Carteira de ações
 
 ## Licença
 
