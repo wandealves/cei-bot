@@ -6,6 +6,9 @@ export default class Config {
   public static URL_DIVIDEND =
     'https://ceiapp.b3.com.br/CEI_Responsivo/ConsultarProventos.aspx';
 
+  public static URL_PORTFOLIO =
+    'https://ceiapp.b3.com.br/CEI_Responsivo/ConsultarCarteiraAtivos.aspx';
+
   public static HEADLESS = false;
 
   public static DELAY = 300;
@@ -19,7 +22,7 @@ export default class Config {
 
     public static BTN_LOGIN = "'ctl00$ContentPlaceHolder1$btnLogar'";
 
-    public static BTN_DIVIDEND = "'ctl00$ContentPlaceHolder1$btnConsultar'";
+    public static BTN_CALL_CONSULT = "'ctl00$ContentPlaceHolder1$btnConsultar'";
 
     public static SLC_INSTITUTION = "'ctl00$ContentPlaceHolder1$ddlAgentes'";
 
@@ -30,6 +33,10 @@ export default class Config {
 
     public static TABLE_HEADER_DIVIDEND = '.responsive > thead > tr > th';
 
+    public static TABLE_HEADER_PORTFOLIO = '.Responsive > thead > tr > th';
+
     public static TABLE_BODY_DIVIDEND = '.responsive > tbody > tr';
+
+    public static TABLE_BODY_PORTFOLIO = '.Responsive > tbody > tr';
   };
 }

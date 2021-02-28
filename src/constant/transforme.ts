@@ -23,6 +23,20 @@ export default class Transforme {
     public static SPEC = 'Espec.';
 
     public static CREDITDATE = 'Data Crédito';
+
+    public static COMPANY = 'Empresa';
+
+    public static TYPE = 'Tipo';
+
+    public static TRADINGCODE = 'Cód. de Negociação';
+
+    public static CODEISIN = 'Cod.ISIN';
+
+    public static PRICE = 'Preço (R$)*';
+
+    public static QTDE = 'Qtde.';
+
+    public static VALUE = 'Valor (R$)';
   };
 
   public static FROM = class {
@@ -43,5 +57,11 @@ export default class Transforme {
     public static GROSSVALUE = 'grossValue';
 
     public static NETVALUE = 'netValue';
+
+    public static COMPANY = 'company';
+
+    public static CODEISIN = 'codISIN';
+
+    public static PRICE = 'price';
   };
 }

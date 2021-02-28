@@ -2,7 +2,9 @@ import puppeteer from 'puppeteer';
 
 import Cei from '../dtos/cei';
 import IncomeResult from '../dtos/incomeResult';
+import PortfolioResult from '../dtos/portfolioResult';
 import IncomeService from './income.service';
+import PortfolioService from './portfolio.service';
 import TransformeService from './transformer.service';
 import BusinessError from '../util/errors/business.error';
 import Setting from '../util/setting';
@@ -19,6 +21,14 @@ export class CeiService {
     await this.loginAsync(this.cei.login, this.cei.password);
     const incomeService = new IncomeService(this.page, this.setting);
     const results = await incomeService.executeAsync();
+    await this.closeAsync();
+    return results;
+  }
+
+  public async getPortfolioAsync(): Promise<PortfolioResult[]> {
+    await this.loginAsync(this.cei.login, this.cei.password);
+    const portfolioService = new PortfolioService(this.page, this.setting);
+    const results = await portfolioService.executeAsync();
     await this.closeAsync();
     return results;
   }
