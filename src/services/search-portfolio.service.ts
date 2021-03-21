@@ -1,39 +1,39 @@
 import puppeteer from 'puppeteer';
 
+import PortfolioResult from '../dtos/portfolioResult';
+import Portfolio from '../dtos/portfolio';
 import Item from '../dtos/item';
-import Income from '../dtos/income';
-import IncomeResult from '../dtos/incomeResult';
 import Status from '../dtos/status';
 import EvaluateService from './evaluate.service';
-import TransformeService from './transformer.service';
 import Setting from '../util/setting';
 import Config from '../constant/config';
+import TransformeService from './transformer.service';
 
-export default class IncomeService {
+export default class SearchPortfolioService {
   constructor(public page: puppeteer.Page, public setting?: Setting) {}
 
-  public async executeAsync(): Promise<IncomeResult[]> {
-    await this.page.goto(Config.URL_DIVIDEND);
+  public async executeAsync(): Promise<PortfolioResult[]> {
+    await this.page.goto(Config.URL_PORTFOLIO);
     await this.page.waitForSelector(`[name=${Config.TAG.SLC_INSTITUTION}]`);
 
     const institutions = await EvaluateService.getItemsAsync(
       this.page,
       `[name=${Config.TAG.SLC_INSTITUTION}]`,
     );
-    const incomeResult = await this.filterDataAsync(this.page, institutions);
-    return incomeResult;
+    const portfolioResult = await this.filterDataAsync(this.page, institutions);
+    return portfolioResult;
   }
 
   private async filterDataAsync(
     page: puppeteer.Page,
     institutions: Item[],
-  ): Promise<IncomeResult[]> {
-    const results: IncomeResult[] = [];
+  ): Promise<PortfolioResult[]> {
+    const results: PortfolioResult[] = [];
 
     if (!institutions) {
-      const yieldError: IncomeResult = new IncomeResult();
-      yieldError.errors.push(`Institutions not found`);
-      results.push(yieldError);
+      const portfolioError: PortfolioResult = new PortfolioResult();
+      portfolioError.errors.push(`Institutions not found`);
+      results.push(portfolioError);
       return results;
     }
 
@@ -46,16 +46,16 @@ export default class IncomeService {
         const institutionId = institutionsFilter[i].id;
         brokerName = institutionsFilter[i].name;
 
-        let datas: Income[] = [];
+        let datas: Portfolio[] = [];
 
-        const incomeResult = this.createIncomeResult(
+        const portfolioResult = this.createPortfolioResult(
           [],
           brokerName,
           institutionId,
           Status.NotFound,
           [],
         );
-        results.push(incomeResult);
+        results.push(portfolioResult);
 
         await page.select(
           `[name=${Config.TAG.SLC_INSTITUTION}]`,
@@ -68,8 +68,8 @@ export default class IncomeService {
 
         datas = await this.transformDataAsync(page);
         if (datas && datas.length > 0) {
-          incomeResult.status = Status.Success;
-          incomeResult.incomeList = datas;
+          portfolioResult.status = Status.Success;
+          portfolioResult.portfolioList = datas;
         }
       } catch {
         // I want application to not crush, but don't care about the message
@@ -78,18 +78,18 @@ export default class IncomeService {
     return results;
   }
 
-  private async transformDataAsync(page: puppeteer.Page): Promise<Income[]> {
+  private async transformDataAsync(page: puppeteer.Page): Promise<Portfolio[]> {
     const header: string[] = await EvaluateService.getListTextAsync(
       page,
-      Config.TAG.TABLE_HEADER_DIVIDEND,
+      Config.TAG.TABLE_HEADER_PORTFOLIO,
     );
 
     const rows: string[] = await EvaluateService.getRowsAsync(
       page,
-      Config.TAG.TABLE_BODY_DIVIDEND,
+      Config.TAG.TABLE_BODY_PORTFOLIO,
     );
 
-    const datas: Income[] = [];
+    const datas: Portfolio[] = [];
 
     /* eslint-disable  @typescript-eslint/no-explicit-any */
     rows.forEach((row: any) => {
@@ -108,19 +108,19 @@ export default class IncomeService {
     return datas;
   }
 
-  private createIncomeResult(
-    datas: Income[],
+  private createPortfolioResult(
+    datas: Portfolio[],
     brokerName: string,
     brokerCode: string,
     status: Status,
     erros: string[],
-  ): IncomeResult {
-    const incomeResult: IncomeResult = new IncomeResult();
-    incomeResult.brokerName = brokerName;
-    incomeResult.brokerCode = brokerCode;
-    incomeResult.status = status;
-    incomeResult.incomeList = datas;
-    incomeResult.errors = erros;
-    return incomeResult;
+  ): PortfolioResult {
+    const portfolioResult: PortfolioResult = new PortfolioResult();
+    portfolioResult.brokerName = brokerName;
+    portfolioResult.brokerCode = brokerCode;
+    portfolioResult.status = status;
+    portfolioResult.portfolioList = datas;
+    portfolioResult.errors = erros;
+    return portfolioResult;
   }
 }
