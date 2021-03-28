@@ -7,6 +7,10 @@ export default class ActiveTradesResult {
 
   brokerCode: string;
 
+  startDate: string;
+
+  endDate: string;
+
   tradedAssetList: TradedAsset[];
 
   negociatedSummaryList: NegociatedSummary[];
@@ -19,6 +23,8 @@ export default class ActiveTradesResult {
     const activeTradesResult: ActiveTradesResult = new ActiveTradesResult();
     activeTradesResult.brokerName = result.brokerName;
     activeTradesResult.brokerCode = result.brokerCode;
+    activeTradesResult.startDate = result.startDate;
+    activeTradesResult.endDate = result.endDate;
     activeTradesResult.status = result.status;
     activeTradesResult.tradedAssetList = result.tradedAssetList;
     activeTradesResult.negociatedSummaryList = result.negociatedSummaryList;

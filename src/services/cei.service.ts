@@ -79,6 +79,8 @@ export class CeiService {
         ActiveTradesResult.create({
           brokerName: '',
           brokerCode: '',
+          startDate: '',
+          endDate: '',
           status: Status.Error,
           tradedAssetList: [],
           negociatedSummaryList: [],

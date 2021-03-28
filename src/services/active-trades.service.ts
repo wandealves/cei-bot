@@ -62,6 +62,8 @@ export default class ActiveTradesService {
           const activeTradesResult = ActiveTradesResult.create({
             brokerName,
             brokerCode: institutionId,
+            startDate,
+            endDate,
             status: Status.NotFound,
             tradedAssetList: [],
             negociatedSummaryList: [],
