@@ -80,7 +80,7 @@ const ceiService = new CeiService(
 })();
 ```
 
-2. **Obtenção dos Rendimentos**
+**1. Obtenção dos Rendimentos**
 
 Lembrando que o processo de obtenção e assíncrona.
 
@@ -113,7 +113,7 @@ const data = await ceiService.getIncomeAsync();
 console.log(JSON.stringify(data, null, 2));
 ```
 
-3. **Obtenção carteira de ativos**
+**2. Obtenção carteira de ativos**
 
 Lembrando que o processo de obtenção e assíncrona.
 
@@ -143,6 +143,39 @@ const ceiService = new CeiService({
 });
 
 const data = await ceiService.getPortfolioAsync();
+console.log(JSON.stringify(data, null, 2));
+```
+
+**3. Negociação de ativos**
+
+Lembrando que o processo de obtenção e assíncrona.
+
+a - Javascript
+
+```javascript
+const CeiService = require('cei-bot').CeiService;
+
+const ceiService = new CeiService({
+  login: 'username',
+  password: 'password',
+});
+
+ceiService.getActiveTradesAsync().then(data => {
+  console.log(JSON.stringify(data, null, 2));
+});
+```
+
+b - TypeScript
+
+```javascript
+import { CeiService } from 'cei-bot';
+
+const ceiService = new CeiService({
+  login: 'username',
+  password: 'password',
+});
+
+const data = await ceiService.getActiveTradesAsync();
 console.log(JSON.stringify(data, null, 2));
 ```
 
@@ -241,7 +274,7 @@ Resultado:
 
 - brokerCode = Código da corretora;
 
-- status = Situação do retorno que pode ser S para Sucesso, E paea Erro e N para resposta não encontrada. Quando S representa que obteve dados do CEI se N significa não existem informações para a corretora;
+- status = Situação do retorno que pode ser S para Sucesso, E para situação de erro e N para situação de resposta não encontrada. Quando S representa que obteve dados do CEI se N significa não existem informações para a corretora;
 
 - errors = Lista de erros em formato de String;
 - incomeList = Lista com todos os rendimentos encontrado no CEI;
@@ -341,7 +374,7 @@ Resultado:
 
 - brokerCode = Código da corretora;
 
-- status = Situação do retorno que pode ser S para Sucesso, E paea Erro e N para resposta não encontrada. Quando S representa que obteve dados do CEI se N significa não existem informações para a corretora;
+- status = Situação do retorno que pode ser S para Sucesso, E para situação de erro e N para situação de resposta não encontrada. Quando S representa que obteve dados do CEI se N significa não existem informações para a corretora;
 
 - errors = Lista de erros em formato de String;
 - portfolioList = Lista com todos os ativos da sua carteira encontrado no CEI;
@@ -359,10 +392,162 @@ Resultado:
 | **quotationFactor** | _Number_ | Fator da cotação.                                                       |
 | **grossValue**      | _Number_ | Valor Bruto (R$) do rendimento do ativo.                                |
 
+#### getActiveTradesAsync()
+
+Retorna os dados das negociações de ativos no período disponivel no CEI.
+
+```javascript
+const resuls = await ceiService.getActiveTradesAsync();
+```
+
+Resultado:
+
+```javascript
+[
+  {
+    "status": "S",
+    "errors": [],
+    "brokerName": "01 - Corretora 01",
+    "brokerCode": "01",
+    "startDate": "01/01/2020",
+    "endDate"  : "01/01/2021",
+    "tradedAssetList": [
+      {
+        "businessDate": "01/01/2021",
+        "buyOrSell": "C",
+        "marketplace": "Mercado a Vista",
+        "termMaturity": "",
+        "code": "COD001",
+        "specification": "FII COD001",
+        "quantity": 10,
+        "price": 100.10,
+        "totalAmount": 1001,
+        "quotationFactor": 1
+      },
+      {
+        "businessDate": "01/01/2021",
+        "buyOrSell": "C",
+        "marketplace": "Mercado a Vista",
+        "termMaturity": "",
+        "code": "COD002",
+        "specification": "ON",
+        "quantity": 5,
+        "price": 0.94,
+        "totalAmount": 4.7,
+        "quotationFactor": 1
+      },
+      {
+        "businessDate": "01/01/2020",
+        "buyOrSell": "C",
+        "marketplace": "Merc. Fracionário",
+        "termMaturity": "",
+        "code": "COD003",
+        "specification": "ON",
+        "quantity": 9,
+        "price": 0.97,
+        "totalAmount": 8.73,
+        "quotationFactor": 1
+      }
+    ],
+    "negociatedSummaryList": [
+      {
+        "code": "COD001",
+        "period": "01/01/2020 a 01/01/2021",
+        "purchaseAmount": 50,
+        "saleAmount": 0,
+        "averagePurchasePrice": 102.8,
+        "averageSalePrice": 0,
+        "liquidity": 0,
+        "position": "-"
+      },
+      {
+        "code": "COD002",
+        "period": "01/01/2020 a 01/01/2021",
+        "purchaseAmount": 100,
+        "saleAmount": 0,
+        "averagePurchasePrice": 42.381,
+        "averageSalePrice": 0,
+        "liquidity": 0,
+        "position": "-"
+      },
+      {
+        "code": "COD003",
+        "period": "01/01/2020 a 01/01/2021",
+        "purchaseAmount": 28,
+        "saleAmount": 0,
+        "averagePurchasePrice": 26.831,
+        "averageSalePrice": 0,
+        "liquidity": 0,
+        "position": "-"
+      }
+    ]
+  },
+  {
+    "status": "S",
+    "errors": [],
+    "brokerName": "02 - Corretora 02",
+    "brokerCode": "02",
+    "tradedAssetList": [],
+    "negociatedSummaryList": []
+  },
+  {
+    "status": "S",
+    "errors": [],
+    "brokerName": "03 - Corretora 03",
+    "brokerCode": "03",
+    "tradedAssetList": [],
+    "negociatedSummaryList": []
+  }
+]
+```
+
+- brokerName = Nome da corretora;
+
+- brokerCode = Código da corretora;
+
+- startDate = Período inicial disponível;
+
+- endDate = Período final disponível;
+
+- status = Situação do retorno que pode ser S para Sucesso, E para situação de erro e N para situação de resposta não encontrada. Quando S representa que obteve dados do CEI se N significa não existem informações para a corretora;
+
+- errors = Lista de erros em formato de String;
+- tradedAssetList = Lista de todos ativos negociados;
+- negociatedSummaryList = Lista do resumo dos negócios no período;
+
+## TradedAsset List
+
+| Propriedade         | Tipo     | Descrição                                                               |
+| ------------------- | -------- | ----------------------------------------------------------------------- |
+| **businessDate**    | _String_ | Data de negócio.                                                        |
+| **buyOrSell**       | _String_ | Compra/Venda.                                                           |
+| **marketplace**     | _String_ | Mercado, Mercado a Vista, Merc. Fracionário, etc.                       |
+| **termMaturity**    | _String_ | Prazo/Vencimento.                                                       |
+| **code**            | _String_ | Código negociação do ativo.                                             |
+| **specification**   | _String_ | Especificação do ativo.                                                 |
+| **quantity**        | _Number_ | Quantidade de ativos.                                                   |
+| **price**           | _Number_ | Preço unitário (R$) do ativo.                                           |
+| **totalAmount**     | _Number_ | Valor total da quantidade vezes preço unitário.                         |
+| **quotationFactor** | _Number_ | Fator de cotação.                                                       |
+
+## Negociated Summary List
+
+| Propriedade              | Tipo     | Descrição                                                               |
+| -------------------------| -------- | ----------------------------------------------------------------------- |
+| **code**                 | _String_ | Código do ativo.                                                        |
+| **period**               | _String_ | período da negociação dos ativos.                                       |
+| **purchaseAmount**       | _Number_ | Quantidade de compra.                                                   |
+| **saleAmount**           | _Number_ | Quantidade de venda.                                                    |
+| **averagePurchasePrice** | _Number_ | Preço médio de compra.                                                  |
+| **averageSalePrice**     | _Number_ | Preço médio de venda.                                                   |
+| **liquidity**            | _Number_ | Quantidade liquída.                                                     |
+| **position**             | _Number_ | Posição.                                                                |
+
 ## Features
 
 - [x] Rendiemntos
 - [x] Carteira de ações
+- [x] Negociação de ativos
 
 ## Licença
 
