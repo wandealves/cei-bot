@@ -1,11 +1,14 @@
 import puppeteer from 'puppeteer';
 
+import Status from '../dtos/status';
 import Cei from '../dtos/cei';
 import IncomeResult from '../dtos/incomeResult';
 import PortfolioResult from '../dtos/portfolioResult';
-import IncomeService from './income.service';
-import PortfolioService from './portfolio.service';
+import ActiveTradesResult from '../dtos/active-trades-result';
+import SearchIncomeService from './search-income.service';
+import SearchPortfolioService from './search-portfolio.service';
 import TransformeService from './transformer.service';
+import ActiveTradesService from './active-trades.service';
 import BusinessError from '../util/errors/business.error';
 import Setting from '../util/setting';
 import Config from '../constant/config';
@@ -18,19 +21,75 @@ export class CeiService {
   constructor(public cei: Cei, public setting?: Setting) {}
 
   public async getIncomeAsync(): Promise<IncomeResult[]> {
-    await this.loginAsync(this.cei.login, this.cei.password);
-    const incomeService = new IncomeService(this.page, this.setting);
-    const results = await incomeService.executeAsync();
-    await this.closeAsync();
-    return results;
+    try {
+      await this.loginAsync(this.cei.login, this.cei.password);
+      const service = new SearchIncomeService(this.page, this.setting);
+      const results = await service.executeAsync();
+      // await this.closeAsync();
+      return results;
+    } catch {
+      return [
+        IncomeResult.create({
+          brokerName: '',
+          brokerCode: '',
+          status: Status.Error,
+          incomeList: [],
+          errors: [
+            `There was an error when trying to obtain income information`,
+          ],
+        }),
+      ];
+    } finally {
+      this.closeAsync();
+    }
   }
 
   public async getPortfolioAsync(): Promise<PortfolioResult[]> {
-    await this.loginAsync(this.cei.login, this.cei.password);
-    const portfolioService = new PortfolioService(this.page, this.setting);
-    const results = await portfolioService.executeAsync();
-    await this.closeAsync();
-    return results;
+    try {
+      await this.loginAsync(this.cei.login, this.cei.password);
+      const service = new SearchPortfolioService(this.page, this.setting);
+      const results = await service.executeAsync();
+      await this.closeAsync();
+      return results;
+    } catch {
+      return [
+        PortfolioResult.create({
+          brokerName: '',
+          brokerCode: '',
+          status: Status.Error,
+          portfolioList: [],
+          errors: [
+            `There was an error when trying to get information from portfolios`,
+          ],
+        }),
+      ];
+    } finally {
+      await this.closeAsync();
+    }
+  }
+
+  public async getActiveTradesAsync(): Promise<ActiveTradesResult[]> {
+    try {
+      await this.loginAsync(this.cei.login, this.cei.password);
+      const service = new ActiveTradesService(this.page, this.setting);
+      const results = await service.executeAsync();
+      return results;
+    } catch (err) {
+      return [
+        ActiveTradesResult.create({
+          brokerName: '',
+          brokerCode: '',
+          status: Status.Error,
+          tradedAssetList: [],
+          negociatedSummaryList: [],
+          errors: [
+            `There was an error when trying to get information from portfolios`,
+          ],
+        }),
+      ];
+    } finally {
+      await this.closeAsync();
+    }
   }
 
   private async startAsync(setting?: Setting): Promise<void> {
@@ -66,10 +125,9 @@ export class CeiService {
     await this.page.type(`[name=${Config.TAG.TEXT_PASSWORD}]`, password, {
       delay: setting?.delay || Config.DELAY,
     });
+
     this.page.click(`[name=${Config.TAG.BTN_LOGIN}]`);
 
-    await this.page.waitForSelector(Config.TAG.LABEL_ID_BREADCRUMB, {
-      timeout: setting?.timeout || Config.TIMEOUTRESPONSE.timeout,
-    });
+    await this.page.waitForSelector(Config.TAG.LABEL_ID_BREADCRUMB);
   }
 }

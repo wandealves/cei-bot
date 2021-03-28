@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import Transforme from '../constant/transforme';
 import ConvertNumber from '../util/convertNumber';
 
@@ -9,39 +10,84 @@ export default class TransformeService {
     if (
       Transforme.TO.SPECIFICATION === tag ||
       Transforme.TO.SPEC === tag ||
-      Transforme.TO.TYPE === tag
+      Transforme.TO.TYPE === tag ||
+      Transforme.TO.ASSETSPECIFICATION === tag
     )
       return Transforme.FROM.SPECIFICATION;
-    if (Transforme.TO.CODE === tag || Transforme.TO.TRADINGCODE === tag)
+    if (
+      Transforme.TO.CODE === tag ||
+      Transforme.TO.TRADINGCODE === tag ||
+      Transforme.TO.COMPLETETRADINGCODE === tag ||
+      Transforme.TO.SUMMARYCODE === tag
+    )
       return Transforme.FROM.CODE;
+
+    if (Transforme.TO.EVENTTYPE === tag) return Transforme.FROM.EVENTTYPE;
+    if (Transforme.TO.BUYSELL === tag) return Transforme.FROM.BUYSELL;
+    if (Transforme.TO.MARKETPLACE === tag) return Transforme.FROM.MARKETPLACE;
+    if (Transforme.TO.PERIOD === tag) return Transforme.FROM.PERIOD;
+    if (Transforme.TO.POSITION === tag) return Transforme.FROM.POSITION;
+
     if (Transforme.TO.PAYMENTDATE === tag || Transforme.TO.CREDITDATE === tag)
       return Transforme.FROM.PAYMENTDATE;
-    if (Transforme.TO.EVENTTYPE === tag) return Transforme.FROM.EVENTTYPE;
-    if (Transforme.TO.QUANTItY === tag || Transforme.TO.QTDE === tag)
+    if (Transforme.TO.BUSINESSDATE === tag) return Transforme.FROM.BUSINESSDATE;
+    if (Transforme.TO.TERMMATURITY === tag) return Transforme.FROM.TERMMATURITY;
+
+    if (
+      Transforme.TO.QUANTITYBASE === tag ||
+      Transforme.TO.QTDE === tag ||
+      Transforme.TO.QUANTITY === tag
+    )
       return Transforme.FROM.QUANTItY;
-    if (Transforme.TO.QUOTATIONFACTOR === tag)
+
+    if (Transforme.TO.QUATITYPURCHASE === tag)
+      return Transforme.FROM.QUATITYPURCHASE;
+    if (Transforme.TO.QUANTITYSALE === tag) return Transforme.FROM.QUANTITYSALE;
+    if (Transforme.TO.QUATITYLIQUIDITY === tag)
+      return Transforme.FROM.QUATITYLIQUIDITY;
+
+    if (
+      Transforme.TO.QUOTATIONFACTOR === tag ||
+      Transforme.TO.COMPLETEQUOTATIONFACTOR === tag
+    )
       return Transforme.FROM.QUOTATIONFACTOR;
+
     if (Transforme.TO.GROSSVALUE === tag || Transforme.TO.VALUE === tag)
       return Transforme.FROM.GROSSVALUE;
     if (Transforme.TO.NETVALUE === tag) return Transforme.FROM.NETVALUE;
     if (Transforme.TO.COMPANY === tag) return Transforme.FROM.COMPANY;
     if (Transforme.TO.CODEISIN === tag) return Transforme.FROM.CODEISIN;
-    if (Transforme.TO.PRICE === tag) return Transforme.FROM.PRICE;
+    if (Transforme.TO.PRICE === tag || Transforme.TO.PRICEV2 === tag)
+      return Transforme.FROM.PRICE;
+    if (Transforme.TO.AVERAGEPURCHASEPRICE === tag)
+      return Transforme.FROM.AVERAGEPURCHASEPRICE;
+    if (Transforme.TO.AVERAGESALEPRICE === tag)
+      return Transforme.FROM.AVERAGESALEPRICE;
+    if (Transforme.TO.TOTALAMOUNT === tag) return Transforme.FROM.TOTALAMOUNT;
 
     return tag;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public static parseNumber(value: any, tag: string): any | number {
     if (
       value &&
       (tag === Transforme.TO.GROSSVALUE ||
         tag === Transforme.TO.NETVALUE ||
-        tag === Transforme.TO.QUANTItY ||
-        tag === Transforme.TO.QUOTATIONFACTOR)
+        tag === Transforme.TO.TOTALAMOUNT ||
+        tag === Transforme.TO.PRICEV2 ||
+        tag === Transforme.TO.QUANTITYBASE ||
+        tag === Transforme.TO.QUANTITY ||
+        tag === Transforme.TO.QUOTATIONFACTOR ||
+        tag === Transforme.TO.COMPLETEQUOTATIONFACTOR ||
+        tag === Transforme.TO.QUATITYPURCHASE ||
+        tag === Transforme.TO.QUANTITYSALE ||
+        tag === Transforme.TO.AVERAGEPURCHASEPRICE ||
+        tag === Transforme.TO.AVERAGESALEPRICE ||
+        tag === Transforme.TO.QUATITYLIQUIDITY)
     ) {
       return ConvertNumber.currency(value);
     }
-
     return value;
   }
 

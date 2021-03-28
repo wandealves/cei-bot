@@ -48,13 +48,13 @@ export default class SearchPortfolioService {
 
         let datas: Portfolio[] = [];
 
-        const portfolioResult = this.createPortfolioResult(
-          [],
+        const portfolioResult = PortfolioResult.create({
+          portfolioList: [],
           brokerName,
-          institutionId,
-          Status.NotFound,
-          [],
-        );
+          brokerCode: institutionId,
+          status: Status.NotFound,
+          errors: [],
+        });
         results.push(portfolioResult);
 
         await page.select(
@@ -108,6 +108,7 @@ export default class SearchPortfolioService {
     return datas;
   }
 
+  /*
   private createPortfolioResult(
     datas: Portfolio[],
     brokerName: string,
@@ -122,5 +123,5 @@ export default class SearchPortfolioService {
     portfolioResult.portfolioList = datas;
     portfolioResult.errors = erros;
     return portfolioResult;
-  }
+  } */
 }

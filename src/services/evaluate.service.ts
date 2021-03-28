@@ -48,4 +48,18 @@ export default class EvaluateService {
 
     return rows;
   }
+
+  public static async singleValueTextAsync(
+    page: puppeteer.Page,
+    tag: string,
+  ): Promise<string> {
+    const element = await page.$(tag);
+    const value = await (
+      await element?.getProperty('textContent')
+    )?.jsonValue();
+
+    if (!value) return '';
+
+    return value as string;
+  }
 }

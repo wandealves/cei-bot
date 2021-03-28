@@ -48,13 +48,13 @@ export default class SearchIncomeService {
 
         let datas: Income[] = [];
 
-        const incomeResult = this.createIncomeResult(
-          [],
+        const incomeResult = IncomeResult.create({
+          incomeList: [],
           brokerName,
-          institutionId,
-          Status.NotFound,
-          [],
-        );
+          brokerCode: institutionId,
+          status: Status.NotFound,
+          errors: [],
+        });
         results.push(incomeResult);
 
         await page.select(
@@ -106,21 +106,5 @@ export default class SearchIncomeService {
     });
 
     return datas;
-  }
-
-  private createIncomeResult(
-    datas: Income[],
-    brokerName: string,
-    brokerCode: string,
-    status: Status,
-    erros: string[],
-  ): IncomeResult {
-    const incomeResult: IncomeResult = new IncomeResult();
-    incomeResult.brokerName = brokerName;
-    incomeResult.brokerCode = brokerCode;
-    incomeResult.status = status;
-    incomeResult.incomeList = datas;
-    incomeResult.errors = erros;
-    return incomeResult;
   }
 }
