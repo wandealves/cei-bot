@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 
-import PortfolioResult from '../dtos/portfolioResult';
+import PortfolioResult from '../dtos/portfolio-result';
 import Portfolio from '../dtos/portfolio';
 import Item from '../dtos/item';
 import Status from '../dtos/status';

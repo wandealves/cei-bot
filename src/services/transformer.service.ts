@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import Transforme from '../constant/transforme';
-import ConvertNumber from '../util/convertNumber';
+import ConvertNumber from '../util/convert-number';
 
 export default class TransformeService {
   public static fromTo(tag: string): string {

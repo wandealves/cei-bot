@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 
 import Item from '../dtos/item';
 import Income from '../dtos/income';
-import IncomeResult from '../dtos/incomeResult';
+import IncomeResult from '../dtos/income-result';
 import Status from '../dtos/status';
 import EvaluateService from './evaluate.service';
 import TransformeService from './transformer.service';

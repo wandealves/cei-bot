@@ -2,8 +2,8 @@ import puppeteer from 'puppeteer';
 
 import Status from '../dtos/status';
 import Cei from '../dtos/cei';
-import IncomeResult from '../dtos/incomeResult';
-import PortfolioResult from '../dtos/portfolioResult';
+import IncomeResult from '../dtos/income-result';
+import PortfolioResult from '../dtos/portfolio-result';
 import ActiveTradesResult from '../dtos/active-trades-result';
 import SearchIncomeService from './search-income.service';
 import SearchPortfolioService from './search-portfolio.service';
