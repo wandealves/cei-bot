@@ -5,8 +5,10 @@ import Cei from '../dtos/cei';
 import IncomeResult from '../dtos/income-result';
 import PortfolioResult from '../dtos/portfolio-result';
 import ActiveTradesResult from '../dtos/active-trades-result';
+import TreasureResult from '../dtos/treasure-result';
 import SearchIncomeService from './search-income.service';
 import SearchPortfolioService from './search-portfolio.service';
+import TreasureService from './treasure.service';
 import TransformeService from './transformer.service';
 import ActiveTradesService from './active-trades.service';
 import BusinessError from '../util/errors/business.error';
@@ -91,6 +93,29 @@ export class CeiService {
       ];
     } finally {
       await this.closeAsync();
+    }
+  }
+
+  public async getTreasureAsync(): Promise<TreasureResult[]> {
+    try {
+      await this.loginAsync(this.cei.login, this.cei.password);
+      const service = new TreasureService(this.page, this.setting);
+      const results = await service.executeAsync();
+      return results;
+    } catch {
+      return [
+        TreasureResult.create({
+          brokerName: '',
+          brokerCode: '',
+          status: Status.Error,
+          treasureList: [],
+          errors: [
+            `There was an error when trying to obtain treasure information`,
+          ],
+        }),
+      ];
+    } finally {
+      this.closeAsync();
     }
   }
 

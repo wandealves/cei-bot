@@ -28,10 +28,13 @@ export default class TransformeService {
     if (Transforme.TO.PERIOD === tag) return Transforme.FROM.PERIOD;
     if (Transforme.TO.POSITION === tag) return Transforme.FROM.POSITION;
 
+    if (Transforme.TO.TITLE === tag) return Transforme.FROM.TITLE;
+
     if (Transforme.TO.PAYMENTDATE === tag || Transforme.TO.CREDITDATE === tag)
       return Transforme.FROM.PAYMENTDATE;
     if (Transforme.TO.BUSINESSDATE === tag) return Transforme.FROM.BUSINESSDATE;
     if (Transforme.TO.TERMMATURITY === tag) return Transforme.FROM.TERMMATURITY;
+    if (Transforme.TO.MATURITY === tag) return Transforme.FROM.MATURITY;
 
     if (
       Transforme.TO.QUANTITYBASE === tag ||
@@ -64,6 +67,11 @@ export default class TransformeService {
     if (Transforme.TO.AVERAGESALEPRICE === tag)
       return Transforme.FROM.AVERAGESALEPRICE;
     if (Transforme.TO.TOTALAMOUNT === tag) return Transforme.FROM.TOTALAMOUNT;
+    if (Transforme.TO.INVESTED === tag) return Transforme.FROM.INVESTED;
+    if (Transforme.TO.CURRENTGROSS === tag) return Transforme.FROM.CURRENTGROSS;
+    if (Transforme.TO.CURRENTNET === tag) return Transforme.FROM.CURRENTNET;
+    if (Transforme.TO.TOTAL === tag) return Transforme.FROM.TOTAL;
+    if (Transforme.TO.BLOCKED === tag) return Transforme.FROM.BLOCKED;
 
     return tag;
   }

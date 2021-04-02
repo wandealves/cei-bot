@@ -33,6 +33,20 @@ export default class EvaluateService {
     return rows;
   }
 
+  public static async getListTextWithItemExclusionAsync(
+    page: puppeteer.Page,
+    deletedItems: string[],
+    tag: string,
+  ): Promise<string[]> {
+    const rows = await page.evaluate(selector => {
+      return Array.prototype.map.call(document.querySelectorAll(selector), el =>
+        el.textContent.trim(),
+      ) as string[];
+    }, tag);
+
+    return rows?.filter(x => !deletedItems.includes(x));
+  }
+
   public static async getRowsAsync(
     page: puppeteer.Page,
     tag: string,

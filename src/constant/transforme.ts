@@ -32,6 +32,8 @@ export default class Transforme {
 
     public static POSITION = 'Posição';
 
+    public static TITLE = 'Título';
+
     public static PAYMENTDATE = 'Prev. Pagamento';
 
     public static CREDITDATE = 'Data Crédito';
@@ -39,6 +41,8 @@ export default class Transforme {
     public static BUSINESSDATE = 'Data do Negócio';
 
     public static TERMMATURITY = 'Prazo/Vencimento';
+
+    public static MATURITY = 'Vencimento';
 
     public static QUANTITYBASE = 'Quantidade Base';
 
@@ -73,6 +77,16 @@ export default class Transforme {
     public static VALUE = 'Valor (R$)';
 
     public static TOTALAMOUNT = 'Valor Total(R$)';
+
+    public static TOTAL = 'Total';
+
+    public static INVESTED = 'Investido';
+
+    public static CURRENTGROSS = 'Bruto Atual';
+
+    public static CURRENTNET = 'Líquido Atual';
+
+    public static BLOCKED = 'Bloqueada';
   };
 
   public static FROM = class {
@@ -122,6 +136,20 @@ export default class Transforme {
 
     public static TERMMATURITY = 'termMaturity';
 
+    public static MATURITY = 'maturity';
+
     public static TOTALAMOUNT = 'totalAmount';
+
+    public static TITLE = 'Title';
+
+    public static INVESTED = 'invested';
+
+    public static CURRENTGROSS = 'currentGross';
+
+    public static CURRENTNET = 'currentNet';
+
+    public static TOTAL = 'total';
+
+    public static BLOCKED = 'blocked';
   };
 }

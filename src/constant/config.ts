@@ -10,6 +10,8 @@ export default class Config {
 
   public static URL_ACTIVE_TRADES = `${Config.URL_BASE}negociacao-de-ativos.aspx`;
 
+  public static URL_TREASURE = `${Config.URL_BASE}extrato-tesouro-direto.aspx`;
+
   public static HEADLESS = false;
 
   public static DELAY = 300;
@@ -31,7 +33,12 @@ export default class Config {
 
     public static BTN_CALL_CONSULT = "'ctl00$ContentPlaceHolder1$btnConsultar'";
 
+    public static BTN_CALL_NEW_CONSULT =
+      "'ctl00$ContentPlaceHolder1$btnNovaConsulta'";
+
     public static SLC_INSTITUTION = "'ctl00$ContentPlaceHolder1$ddlAgentes'";
+
+    public static SLC_ACCOUNTS = "'ctl00$ContentPlaceHolder1$ddlContas'";
 
     public static LABEL_ID_DIVIDEND =
       '#ctl00_ContentPlaceHolder1_rptAgenteProventos_ctl00_lblAgenteProventos';
@@ -42,9 +49,13 @@ export default class Config {
 
     public static TABLE_HEADER_PORTFOLIO = '.Responsive > thead > tr > th';
 
+    public static TABLE_HEADER_TREASURE = '.responsive > thead > tr > td';
+
     public static TABLE_BODY_DIVIDEND = '.responsive > tbody > tr';
 
     public static TABLE_BODY_PORTFOLIO = '.Responsive > tbody > tr';
+
+    public static TABLE_BODY_TREASURE = '.responsive > tbody > tr';
 
     public static TABLE_BODY_ACTIVE_TRADES_TABLE_ONE =
       '#ctl00_ContentPlaceHolder1_rptAgenteBolsa_ctl00_rptContaBolsa_ctl00_pnAtivosNegociados .responsive > tbody > tr';
