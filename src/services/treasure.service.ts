@@ -115,7 +115,7 @@ export default class TreasureService {
   private async transformDataAsync(page: puppeteer.Page): Promise<Treasure[]> {
     const header: string[] = await EvaluateService.getListTextWithItemExclusionAsync(
       page,
-      ['Valor (R$)', 'Quantidade'],
+      ['Valor (R$)', 'Quantidade', 'Extrato Analítico'],
       Config.TAG.TABLE_HEADER_TREASURE,
     );
 
@@ -131,11 +131,13 @@ export default class TreasureService {
       const dataRow: any = {};
       row.forEach((lineValue: string, index: number) => {
         const headerTag = header[index];
-        const transformedTag = TransformeService.fromTo(headerTag);
-        dataRow[transformedTag] = TransformeService.parseNumber(
-          lineValue,
-          headerTag,
-        );
+        if (headerTag) {
+          const transformedTag = TransformeService.fromTo(headerTag);
+          dataRow[transformedTag] = TransformeService.parseNumber(
+            lineValue,
+            headerTag,
+          );
+        }
       });
       datas.push(dataRow);
     });

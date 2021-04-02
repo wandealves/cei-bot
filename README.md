@@ -79,10 +79,17 @@ const ceiService = new CeiService(
   console.log(JSON.stringify(data, null, 2));
 })();
 ```
+## Settings
+
+| Propriedade  | Tipo      | Default | Descrição                                                                                                                                 |
+| ------------ | --------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **headless** | _Boolean_ | _true_  | Se `true`, o navegador interno do Puppeteer será executado pode ser observado as acões.                                                   |
+| **delay**    | _Number_  | 300     | Tempo, em ms, usado para adicionar valores nos inputs para evitar problemas de digitação muito rápida.                                    |
+| **timeout**  | _Number_  | 300     | Tempo, em ms, de resposta de uma ação, para evitar obtenção de informações nulas ou vazias espera um tempo para a respsosta do navegador. |
 
 **1. Obtenção dos Rendimentos**
 
-Lembrando que o processo de obtenção e assíncrona.
+Serviço para obtenção dos rendimentos.
 
 a - Javascript
 
@@ -112,86 +119,9 @@ const ceiService = new CeiService({
 const data = await ceiService.getIncomeAsync();
 console.log(JSON.stringify(data, null, 2));
 ```
+## GetIncomeAsync()
 
-**2. Obtenção carteira de ativos**
-
-Lembrando que o processo de obtenção e assíncrona.
-
-a - Javascript
-
-```javascript
-const CeiService = require('cei-bot').CeiService;
-
-const ceiService = new CeiService({
-  login: 'username',
-  password: 'password',
-});
-
-ceiService.getPortfolioAsync().then(data => {
-  console.log(JSON.stringify(data, null, 2));
-});
-```
-
-b - TypeScript
-
-```javascript
-import { CeiService } from 'cei-bot';
-
-const ceiService = new CeiService({
-  login: 'username',
-  password: 'password',
-});
-
-const data = await ceiService.getPortfolioAsync();
-console.log(JSON.stringify(data, null, 2));
-```
-
-**3. Negociação de ativos**
-
-Lembrando que o processo de obtenção e assíncrona.
-
-a - Javascript
-
-```javascript
-const CeiService = require('cei-bot').CeiService;
-
-const ceiService = new CeiService({
-  login: 'username',
-  password: 'password',
-});
-
-ceiService.getActiveTradesAsync().then(data => {
-  console.log(JSON.stringify(data, null, 2));
-});
-```
-
-b - TypeScript
-
-```javascript
-import { CeiService } from 'cei-bot';
-
-const ceiService = new CeiService({
-  login: 'username',
-  password: 'password',
-});
-
-const data = await ceiService.getActiveTradesAsync();
-console.log(JSON.stringify(data, null, 2));
-```
-
-## Settings
-
-| Propriedade  | Tipo      | Default | Descrição                                                                                                                                 |
-| ------------ | --------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| **headless** | _Boolean_ | _true_  | Se `true`, o navegador interno do Puppeteer será executado pode ser observado as acões.                                                   |
-| **delay**    | _Number_  | 300     | Tempo, em ms, usado para adicionar valores nos inputs para evitar problemas de digitação muito rápida.                                    |
-| **timeout**  | _Number_  | 300     | Tempo, em ms, de resposta de uma ação, para evitar obtenção de informações nulas ou vazias espera um tempo para a respsosta do navegador. |
-
-### Métodos disponíveis
-
-#### GetIncomeAsync()
-
-Retorna os dados os rendiementos do mês no CEI.
+Retorna os dados os rendiementos do mês.
 
 ```javascript
 const resuls = await ceiService.getIncomeAsync();
@@ -293,7 +223,40 @@ Resultado:
 | **grossValue**      | _Number_ | Valor Bruto (R$) do rendimento do ativo.                                               |
 | **netValue**        | _Number_ | Valor líquido (R$) do rendimento do ativo.                                             |
 
-#### GetPortfolioAsync()
+**2. Obtenção carteira de ativos**
+
+Serviço para obtenção dos ativos disponíveis no CEI.
+
+a - Javascript
+
+```javascript
+const CeiService = require('cei-bot').CeiService;
+
+const ceiService = new CeiService({
+  login: 'username',
+  password: 'password',
+});
+
+ceiService.getPortfolioAsync().then(data => {
+  console.log(JSON.stringify(data, null, 2));
+});
+```
+
+b - TypeScript
+
+```javascript
+import { CeiService } from 'cei-bot';
+
+const ceiService = new CeiService({
+  login: 'username',
+  password: 'password',
+});
+
+const data = await ceiService.getPortfolioAsync();
+console.log(JSON.stringify(data, null, 2));
+```
+
+## GetPortfolioAsync()
 
 Retorna os dados da carteira de ativos do mês no CEI.
 
@@ -392,9 +355,41 @@ Resultado:
 | **quotationFactor** | _Number_ | Fator da cotação.                                                       |
 | **grossValue**      | _Number_ | Valor Bruto (R$) do rendimento do ativo.                                |
 
-#### getActiveTradesAsync()
+**3. Negociação de ativos**
 
-Retorna os dados das negociações de ativos no período disponivel no CEI.
+Serviço para a obtenção das negociações de ativos.
+
+a - Javascript
+
+```javascript
+const CeiService = require('cei-bot').CeiService;
+
+const ceiService = new CeiService({
+  login: 'username',
+  password: 'password',
+});
+
+ceiService.getActiveTradesAsync().then(data => {
+  console.log(JSON.stringify(data, null, 2));
+});
+```
+
+b - TypeScript
+
+```javascript
+import { CeiService } from 'cei-bot';
+
+const ceiService = new CeiService({
+  login: 'username',
+  password: 'password',
+});
+
+const data = await ceiService.getActiveTradesAsync();
+console.log(JSON.stringify(data, null, 2));
+```
+## getActiveTradesAsync()
+
+Retorna os dados das negociações de ativos no período disponivel.
 
 ```javascript
 const resuls = await ceiService.getActiveTradesAsync();
@@ -543,11 +538,125 @@ Resultado:
 | **liquidity**            | _Number_ | Quantidade liquída.                                                     |
 | **position**             | _Number_ | Posição.                                                                |
 
+
+**4. Tesouro Direto**
+
+Serviço para obtenção dos investimentos em tesouro direto.
+
+a - Javascript
+
+```javascript
+const CeiService = require('cei-bot').CeiService;
+
+const ceiService = new CeiService({
+  login: 'username',
+  password: 'password',
+});
+
+ceiService.getTreasureAsync().then(data => {
+  console.log(JSON.stringify(data, null, 2));
+});
+```
+
+b - TypeScript
+
+```javascript
+import { CeiService } from 'cei-bot';
+
+const ceiService = new CeiService({
+  login: 'username',
+  password: 'password',
+});
+
+const data = await ceiService.getTreasureAsync();
+console.log(JSON.stringify(data, null, 2));
+```
+
+## getTreasureAsync()
+
+Retorna os dados dos investimentos em tesouro direto.
+
+```javascript
+const resuls = await ceiService.getTreasureAsync();
+```
+
+Resultado:
+
+```javascript
+
+[
+  {
+    "status": "S",
+    "errors": [],
+    "brokerName": "100 - Corretora 01",
+    "brokerCode": "100",
+    "treasureList": [
+      {
+        "Title": "Tesouro IPCA+ 2055",
+        "maturity": "15/05/2055",
+        "Extrato Analítico": "15.330,03",
+        "invested": "19.204,41",
+        "currentGross": "18.262,37",
+        "currentNet": "10,80",
+        "total": "0,00",
+        "blocked": ""
+      },
+      {
+        "Title": "Tesouro IPCA+ 2035",
+        "maturity": "15/05/2035",
+        "Extrato Analítico": "3.997,44",
+        "invested": "4.133,27",
+        "currentGross": "4.096,96",
+        "currentNet": "3,14",
+        "total": "0,00",
+        "blocked": ""
+      }
+    ]
+  },
+  {
+    "status": "N",
+    "errors": [],
+    "brokerName": "200 - Corretora 02",
+    "brokerCode": "200",
+    "treasureList": []
+  },
+  {
+    "status": "N",
+    "errors": [],
+    "brokerName": "300 - Corretora 03",
+    "brokerCode": "300",
+    "treasureList": []
+  },
+]
+```
+
+- brokerName = Nome da corretora;
+
+- brokerCode = Código da corretora;
+
+- status = Situação do retorno que pode ser S para Sucesso, E para situação de erro e N para situação de resposta não encontrada. Quando S representa que obteve dados do CEI se N significa não existem informações para a corretora;
+
+- errors = Lista de erros em formato de String;
+- treasureList = Lista com todos os investimentos em tesouro direto;
+
+## Treasure List
+
+| Propriedade         | Tipo     | Descrição                                                               |
+| ------------------- | -------- | ----------------------------------------------------------------------- |
+| **Title**           | _String_ | Título do tesouro direto.                                               |
+| **maturity**        | _String_ | Data de vencimento.                                                     |
+| **invested**        | _Number_ | Valor investido.                                                        |
+| **currentGross**    | _Number_ | Bruto total.                                                            |
+| **currentNet**      | _Number_ | Líquido atual.                                                          |
+| **total**           | _Number_ | Quatidade total comprado.                                               |
+| **blocked**         | _Number_ | Quantidade bloqueada.                                                   |
+
 ## Features
 
 - [x] Rendiemntos
 - [x] Carteira de ações
 - [x] Negociação de ativos
+- [x] Tesouro direto
 
 ## Licença
 
