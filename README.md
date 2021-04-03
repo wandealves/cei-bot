@@ -1,9 +1,11 @@
 # cei-bot 💸
 
+<div align="center">
 <img src="https://img.shields.io/github/issues/wandealves/cei-bot"/>
 <img src="https://img.shields.io/github/stars/wandealves/cei-bot"/>
 <img src="https://img.shields.io/github/license/wandealves/cei-bot"/>
 <img alt="GitHub language count" src="https://img.shields.io/badge/TS-typescript-blue"/>
+</div>
 
 
 Bot para ler dados do Canal Eletrônico do Investidor, a principal funcionalidade desse projeto é obter dados do CEI - Canal Eletrônico do Investidor e tranformá-lo em informações que possam ser consumidos por outras aplicações.
