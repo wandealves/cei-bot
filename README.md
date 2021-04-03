@@ -1,6 +1,31 @@
 # cei-bot 💸
 
+<img src="https://img.shields.io/github/issues/wandealves/cei-bot"/>
+<img src="https://img.shields.io/github/stars/wandealves/cei-bot"/>
+<img src="https://img.shields.io/github/license/wandealves/cei-bot"/>
+<img alt="GitHub language count" src="https://img.shields.io/badge/TS-typescript-blue"/>
+
+
 Bot para ler dados do Canal Eletrônico do Investidor, a principal funcionalidade desse projeto é obter dados do CEI - Canal Eletrônico do Investidor e tranformá-lo em informações que possam ser consumidos por outras aplicações.
+
+<!--ts-->
+   * [Dependências](#Dependências)
+   * [Instalação](#Instalação)
+   * [Utilização](#Utilização)
+   * [Settings](#Settings)
+   * [1. Obtenção dos Rendimentos](#1-Obtenção-dos-Rendimentos)
+      * [1.1. Get Income](#1.1-Get-Income)
+   * [2. Obtenção carteira de ativos](#2-Obtenção-carteira-de-ativos)
+      * [2.1. Get Portfolio](#2.1-Get-Portfolio)
+   * [3. Negociação de ativos](#3-Negociação-de-ativos)
+      * [3.1. Get Active Trades](#3.1-Get-Active-Trades)
+      * [3.2. Negociated Summary List](#3.2-Negociated-Summary-List)
+   * [4. Tesouro Direto](#4-Tesouro-Direto)
+      * [4.1. Get Treasure](#4.1-Get-Treasure)
+   * [Tecnologias](#🛠-Tecnologias)
+   * [Features](#Features)
+   * [Licença](#Licença)
+<!--te-->
 
 ## Dependências
 
@@ -87,7 +112,7 @@ const ceiService = new CeiService(
 | **delay**    | _Number_  | 300     | Tempo, em ms, usado para adicionar valores nos inputs para evitar problemas de digitação muito rápida.                                    |
 | **timeout**  | _Number_  | 300     | Tempo, em ms, de resposta de uma ação, para evitar obtenção de informações nulas ou vazias espera um tempo para a respsosta do navegador. |
 
-**1. Obtenção dos Rendimentos**
+## 1. Obtenção dos Rendimentos
 
 Serviço para obtenção dos rendimentos.
 
@@ -119,7 +144,7 @@ const ceiService = new CeiService({
 const data = await ceiService.getIncomeAsync();
 console.log(JSON.stringify(data, null, 2));
 ```
-## GetIncomeAsync()
+### 1.1. Get Income
 
 Retorna os dados os rendiementos do mês.
 
@@ -223,7 +248,7 @@ Resultado:
 | **grossValue**      | _Number_ | Valor Bruto (R$) do rendimento do ativo.                                               |
 | **netValue**        | _Number_ | Valor líquido (R$) do rendimento do ativo.                                             |
 
-**2. Obtenção carteira de ativos**
+## 2. Obtenção carteira de ativos
 
 Serviço para obtenção dos ativos disponíveis no CEI.
 
@@ -256,7 +281,7 @@ const data = await ceiService.getPortfolioAsync();
 console.log(JSON.stringify(data, null, 2));
 ```
 
-## GetPortfolioAsync()
+### 2.1. Get Portfolio
 
 Retorna os dados da carteira de ativos do mês no CEI.
 
@@ -355,7 +380,7 @@ Resultado:
 | **quotationFactor** | _Number_ | Fator da cotação.                                                       |
 | **grossValue**      | _Number_ | Valor Bruto (R$) do rendimento do ativo.                                |
 
-**3. Negociação de ativos**
+## 3. Negociação de ativos
 
 Serviço para a obtenção das negociações de ativos.
 
@@ -387,7 +412,7 @@ const ceiService = new CeiService({
 const data = await ceiService.getActiveTradesAsync();
 console.log(JSON.stringify(data, null, 2));
 ```
-## getActiveTradesAsync()
+### 3.1. Get Active Trades
 
 Retorna os dados das negociações de ativos no período disponivel.
 
@@ -525,7 +550,7 @@ Resultado:
 | **totalAmount**     | _Number_ | Valor total da quantidade vezes preço unitário.                         |
 | **quotationFactor** | _Number_ | Fator de cotação.                                                       |
 
-## Negociated Summary List
+### 3.2. Negociated Summary List
 
 | Propriedade              | Tipo     | Descrição                                                               |
 | -------------------------| -------- | ----------------------------------------------------------------------- |
@@ -538,8 +563,7 @@ Resultado:
 | **liquidity**            | _Number_ | Quantidade liquída.                                                     |
 | **position**             | _Number_ | Posição.                                                                |
 
-
-**4. Tesouro Direto**
+## 4. Tesouro Direto
 
 Serviço para obtenção dos investimentos em tesouro direto.
 
@@ -572,7 +596,7 @@ const data = await ceiService.getTreasureAsync();
 console.log(JSON.stringify(data, null, 2));
 ```
 
-## getTreasureAsync()
+### 4.1. Get Treasure
 
 Retorna os dados dos investimentos em tesouro direto.
 
@@ -650,6 +674,14 @@ Resultado:
 | **currentNet**      | _Number_ | Líquido atual.                                                          |
 | **total**           | _Number_ | Quatidade total comprado.                                               |
 | **blocked**         | _Number_ | Quantidade bloqueada.                                                   |
+
+### 🛠 Tecnologias
+
+As seguintes ferramentas foram usadas na construção do projeto:
+
+- [Node.js](https://nodejs.org/en/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Puppeteer](https://pptr.dev/)
 
 ## Features
 
