@@ -27,6 +27,7 @@ Bot para ler dados do Canal Eletrônico do Investidor, a principal funcionalidad
    * [Tecnologias](#-tecnologias)
    * [Features](#Features)
    * [Licença](#Licença)
+   * [Contribuidores](#Contribuidores)
 <!--te-->
 
 ## Dependências
@@ -691,6 +692,12 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [x] Carteira de ações
 - [x] Negociação de ativos
 - [x] Tesouro direto
+
+## Contribuidores
+
+<a href="https://github.com/wandealves/cei-bot">
+  <img src="https://contrib.rocks/image?repo=wandealves/cei-bot" />
+</a>
 
 ## Licença
 
