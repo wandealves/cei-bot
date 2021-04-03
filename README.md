@@ -24,7 +24,7 @@ Bot para ler dados do Canal Eletrônico do Investidor, a principal funcionalidad
       * [3.2. Negociated Summary List](#32-negociated-summary-list)
    * [4. Tesouro Direto](#4-Tesouro-Direto)
       * [4.1. Get Treasure](#41-get-treasure)
-   * [Tecnologias](#🛠-Tecnologias)
+   * [Tecnologias](#-tecnologias)
    * [Features](#Features)
    * [Licença](#Licença)
 <!--te-->
