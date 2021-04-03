@@ -26,8 +26,8 @@ Bot para ler dados do Canal Eletrônico do Investidor, a principal funcionalidad
       * [4.1. Get Treasure](#41-get-treasure)
    * [Tecnologias](#-tecnologias)
    * [Features](#Features)
-   * [Licença](#Licença)
    * [Contribuidores](#Contribuidores)
+   * [Licença](#Licença)
 <!--te-->
 
 ## Dependências
