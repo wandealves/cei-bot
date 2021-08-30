@@ -119,9 +119,10 @@ export class CeiService {
     }
   }
 
-  private async startAsync(setting: Setting): Promise<void> {
+  private async startAsync(setting?: Setting): Promise<void> {
     this.browser = await puppeteer.launch({
-      headless: setting.headless || Config.HEADLESS,
+      headless: setting?.headless || Config.HEADLESS,
+      args: ['--no-sandbox']
     });
     this.page = await this.browser.newPage();
   }
