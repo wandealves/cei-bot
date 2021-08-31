@@ -7,27 +7,27 @@
 <img alt="GitHub language count" src="https://img.shields.io/badge/TS-typescript-blue"/>
 </div>
 
-
 Bot para ler dados do Canal Eletrônico do Investidor, a principal funcionalidade desse projeto é obter dados do CEI - Canal Eletrônico do Investidor e tranformá-lo em informações que possam ser consumidos por outras aplicações.
 
 <!--ts-->
-   * [Dependências](#Dependências)
-   * [Instalação](#Instalação)
-   * [Utilização](#Utilização)
-   * [Settings](#Settings)
-   * [1. Obtenção dos Rendimentos](#1-Obtenção-dos-Rendimentos)
-      * [1.1. Get Income](#11-get-income)
-   * [2. Obtenção carteira de ativos](#2-Obtenção-carteira-de-ativos)
-      * [2.1. Get Portfolio](#21-get-portfolio)
-   * [3. Negociação de ativos](#3-Negociação-de-ativos)
-      * [3.1. Get Active Trades](#31-get-active-trades)
-      * [3.2. Negociated Summary List](#32-negociated-summary-list)
-   * [4. Tesouro Direto](#4-Tesouro-Direto)
-      * [4.1. Get Treasure](#41-get-treasure)
-   * [Tecnologias](#-tecnologias)
-   * [Features](#Features)
-   * [Contribuidores](#Contribuidores)
-   * [Licença](#Licença)
+
+- [Dependências](#Dependências)
+- [Instalação](#Instalação)
+- [Utilização](#Utilização)
+- [Settings](#Settings)
+- [1. Obtenção dos Rendimentos](#1-Obtenção-dos-Rendimentos)
+  - [1.1. Get Income](#11-get-income)
+- [2. Obtenção carteira de ativos](#2-Obtenção-carteira-de-ativos)
+  - [2.1. Get Portfolio](#21-get-portfolio)
+- [3. Negociação de ativos](#3-Negociação-de-ativos)
+  - [3.1. Get Active Trades](#31-get-active-trades)
+  - [3.2. Negociated Summary List](#32-negociated-summary-list)
+- [4. Tesouro Direto](#4-Tesouro-Direto)
+  - [4.1. Get Treasure](#41-get-treasure)
+- [Tecnologias](#-tecnologias)
+- [Features](#Features)
+- [Contribuidores](#Contribuidores)
+- [Licença](#Licença)
 <!--te-->
 
 ## Dependências
@@ -107,6 +107,7 @@ const ceiService = new CeiService(
   console.log(JSON.stringify(data, null, 2));
 })();
 ```
+
 ## Settings
 
 | Propriedade  | Tipo      | Default | Descrição                                                                                                                                 |
@@ -147,6 +148,7 @@ const ceiService = new CeiService({
 const data = await ceiService.getIncomeAsync();
 console.log(JSON.stringify(data, null, 2));
 ```
+
 ### 1.1. Get Income
 
 Retorna os dados os rendiementos do mês.
@@ -415,6 +417,7 @@ const ceiService = new CeiService({
 const data = await ceiService.getActiveTradesAsync();
 console.log(JSON.stringify(data, null, 2));
 ```
+
 ### 3.1. Get Active Trades
 
 Retorna os dados das negociações de ativos no período disponivel.
@@ -428,100 +431,100 @@ Resultado:
 ```javascript
 [
   {
-    "status": "S",
-    "errors": [],
-    "brokerName": "01 - Corretora 01",
-    "brokerCode": "01",
-    "startDate": "01/01/2020",
-    "endDate"  : "01/01/2021",
-    "tradedAssetList": [
+    status: 'S',
+    errors: [],
+    brokerName: '01 - Corretora 01',
+    brokerCode: '01',
+    startDate: '01/01/2020',
+    endDate: '01/01/2021',
+    tradedAssetList: [
       {
-        "businessDate": "01/01/2021",
-        "buyOrSell": "C",
-        "marketplace": "Mercado a Vista",
-        "termMaturity": "",
-        "code": "COD001",
-        "specification": "FII COD001",
-        "quantity": 10,
-        "price": 100.10,
-        "totalAmount": 1001,
-        "quotationFactor": 1
+        businessDate: '01/01/2021',
+        buyOrSell: 'C',
+        marketplace: 'Mercado a Vista',
+        termMaturity: '',
+        code: 'COD001',
+        specification: 'FII COD001',
+        quantity: 10,
+        price: 100.1,
+        totalAmount: 1001,
+        quotationFactor: 1,
       },
       {
-        "businessDate": "01/01/2021",
-        "buyOrSell": "C",
-        "marketplace": "Mercado a Vista",
-        "termMaturity": "",
-        "code": "COD002",
-        "specification": "ON",
-        "quantity": 5,
-        "price": 0.94,
-        "totalAmount": 4.7,
-        "quotationFactor": 1
+        businessDate: '01/01/2021',
+        buyOrSell: 'C',
+        marketplace: 'Mercado a Vista',
+        termMaturity: '',
+        code: 'COD002',
+        specification: 'ON',
+        quantity: 5,
+        price: 0.94,
+        totalAmount: 4.7,
+        quotationFactor: 1,
       },
       {
-        "businessDate": "01/01/2020",
-        "buyOrSell": "C",
-        "marketplace": "Merc. Fracionário",
-        "termMaturity": "",
-        "code": "COD003",
-        "specification": "ON",
-        "quantity": 9,
-        "price": 0.97,
-        "totalAmount": 8.73,
-        "quotationFactor": 1
-      }
+        businessDate: '01/01/2020',
+        buyOrSell: 'C',
+        marketplace: 'Merc. Fracionário',
+        termMaturity: '',
+        code: 'COD003',
+        specification: 'ON',
+        quantity: 9,
+        price: 0.97,
+        totalAmount: 8.73,
+        quotationFactor: 1,
+      },
     ],
-    "negociatedSummaryList": [
+    negociatedSummaryList: [
       {
-        "code": "COD001",
-        "period": "01/01/2020 a 01/01/2021",
-        "purchaseAmount": 50,
-        "saleAmount": 0,
-        "averagePurchasePrice": 102.8,
-        "averageSalePrice": 0,
-        "liquidity": 0,
-        "position": "-"
+        code: 'COD001',
+        period: '01/01/2020 a 01/01/2021',
+        purchaseAmount: 50,
+        saleAmount: 0,
+        averagePurchasePrice: 102.8,
+        averageSalePrice: 0,
+        liquidity: 0,
+        position: '-',
       },
       {
-        "code": "COD002",
-        "period": "01/01/2020 a 01/01/2021",
-        "purchaseAmount": 100,
-        "saleAmount": 0,
-        "averagePurchasePrice": 42.381,
-        "averageSalePrice": 0,
-        "liquidity": 0,
-        "position": "-"
+        code: 'COD002',
+        period: '01/01/2020 a 01/01/2021',
+        purchaseAmount: 100,
+        saleAmount: 0,
+        averagePurchasePrice: 42.381,
+        averageSalePrice: 0,
+        liquidity: 0,
+        position: '-',
       },
       {
-        "code": "COD003",
-        "period": "01/01/2020 a 01/01/2021",
-        "purchaseAmount": 28,
-        "saleAmount": 0,
-        "averagePurchasePrice": 26.831,
-        "averageSalePrice": 0,
-        "liquidity": 0,
-        "position": "-"
-      }
-    ]
+        code: 'COD003',
+        period: '01/01/2020 a 01/01/2021',
+        purchaseAmount: 28,
+        saleAmount: 0,
+        averagePurchasePrice: 26.831,
+        averageSalePrice: 0,
+        liquidity: 0,
+        position: '-',
+      },
+    ],
   },
   {
-    "status": "S",
-    "errors": [],
-    "brokerName": "02 - Corretora 02",
-    "brokerCode": "02",
-    "tradedAssetList": [],
-    "negociatedSummaryList": []
+    status: 'S',
+    errors: [],
+    brokerName: '02 - Corretora 02',
+    brokerCode: '02',
+    tradedAssetList: [],
+    negociatedSummaryList: [],
   },
   {
-    "status": "S",
-    "errors": [],
-    "brokerName": "03 - Corretora 03",
-    "brokerCode": "03",
-    "tradedAssetList": [],
-    "negociatedSummaryList": []
-  }
-]
+    status: 'S',
+    errors: [],
+    brokerName: '03 - Corretora 03',
+    brokerCode: '03',
+    tradedAssetList: [],
+    negociatedSummaryList: [],
+  },
+];
 ```
 
 - brokerName = Nome da corretora;
@@ -540,31 +543,31 @@ Resultado:
 
 ## TradedAsset List
 
-| Propriedade         | Tipo     | Descrição                                                               |
-| ------------------- | -------- | ----------------------------------------------------------------------- |
-| **businessDate**    | _String_ | Data de negócio.                                                        |
-| **buyOrSell**       | _String_ | Compra/Venda.                                                           |
-| **marketplace**     | _String_ | Mercado, Mercado a Vista, Merc. Fracionário, etc.                       |
-| **termMaturity**    | _String_ | Prazo/Vencimento.                                                       |
-| **code**            | _String_ | Código negociação do ativo.                                             |
-| **specification**   | _String_ | Especificação do ativo.                                                 |
-| **quantity**        | _Number_ | Quantidade de ativos.                                                   |
-| **price**           | _Number_ | Preço unitário (R$) do ativo.                                           |
-| **totalAmount**     | _Number_ | Valor total da quantidade vezes preço unitário.                         |
-| **quotationFactor** | _Number_ | Fator de cotação.                                                       |
+| Propriedade         | Tipo     | Descrição                                         |
+| ------------------- | -------- | ------------------------------------------------- |
+| **businessDate**    | _String_ | Data de negócio.                                  |
+| **buyOrSell**       | _String_ | Compra/Venda.                                     |
+| **marketplace**     | _String_ | Mercado, Mercado a Vista, Merc. Fracionário, etc. |
+| **termMaturity**    | _String_ | Prazo/Vencimento.                                 |
+| **code**            | _String_ | Código negociação do ativo.                       |
+| **specification**   | _String_ | Especificação do ativo.                           |
+| **quantity**        | _Number_ | Quantidade de ativos.                             |
+| **price**           | _Number_ | Preço unitário (R$) do ativo.                     |
+| **totalAmount**     | _Number_ | Valor total da quantidade vezes preço unitário.   |
+| **quotationFactor** | _Number_ | Fator de cotação.                                 |
 
 ### 3.2. Negociated Summary List
 
-| Propriedade              | Tipo     | Descrição                                                               |
-| -------------------------| -------- | ----------------------------------------------------------------------- |
-| **code**                 | _String_ | Código do ativo.                                                        |
-| **period**               | _String_ | período da negociação dos ativos.                                       |
-| **purchaseAmount**       | _Number_ | Quantidade de compra.                                                   |
-| **saleAmount**           | _Number_ | Quantidade de venda.                                                    |
-| **averagePurchasePrice** | _Number_ | Preço médio de compra.                                                  |
-| **averageSalePrice**     | _Number_ | Preço médio de venda.                                                   |
-| **liquidity**            | _Number_ | Quantidade liquída.                                                     |
-| **position**             | _Number_ | Posição.                                                                |
+| Propriedade              | Tipo     | Descrição                         |
+| ------------------------ | -------- | --------------------------------- |
+| **code**                 | _String_ | Código do ativo.                  |
+| **period**               | _String_ | período da negociação dos ativos. |
+| **purchaseAmount**       | _Number_ | Quantidade de compra.             |
+| **saleAmount**           | _Number_ | Quantidade de venda.              |
+| **averagePurchasePrice** | _Number_ | Preço médio de compra.            |
+| **averageSalePrice**     | _Number_ | Preço médio de venda.             |
+| **liquidity**            | _Number_ | Quantidade liquída.               |
+| **position**             | _Number_ | Posição.                          |
 
 ## 4. Tesouro Direto
 
@@ -610,51 +613,50 @@ const resuls = await ceiService.getTreasureAsync();
 Resultado:
 
 ```javascript
-
 [
   {
-    "status": "S",
-    "errors": [],
-    "brokerName": "100 - Corretora 01",
-    "brokerCode": "100",
-    "treasureList": [
+    status: 'S',
+    errors: [],
+    brokerName: '100 - Corretora 01',
+    brokerCode: '100',
+    treasureList: [
       {
-        "Title": "Tesouro IPCA+ 2055",
-        "maturity": "15/05/2055",
-        "Extrato Analítico": "15.330,03",
-        "invested": "19.204,41",
-        "currentGross": "18.262,37",
-        "currentNet": "10,80",
-        "total": "0,00",
-        "blocked": ""
+        Title: 'Tesouro IPCA+ 2055',
+        maturity: '15/05/2055',
+        'Extrato Analítico': '15.330,03',
+        invested: '19.204,41',
+        currentGross: '18.262,37',
+        currentNet: '10,80',
+        total: '0,00',
+        blocked: '',
       },
       {
-        "Title": "Tesouro IPCA+ 2035",
-        "maturity": "15/05/2035",
-        "Extrato Analítico": "3.997,44",
-        "invested": "4.133,27",
-        "currentGross": "4.096,96",
-        "currentNet": "3,14",
-        "total": "0,00",
-        "blocked": ""
-      }
-    ]
+        Title: 'Tesouro IPCA+ 2035',
+        maturity: '15/05/2035',
+        'Extrato Analítico': '3.997,44',
+        invested: '4.133,27',
+        currentGross: '4.096,96',
+        currentNet: '3,14',
+        total: '0,00',
+        blocked: '',
+      },
+    ],
   },
   {
-    "status": "N",
-    "errors": [],
-    "brokerName": "200 - Corretora 02",
-    "brokerCode": "200",
-    "treasureList": []
+    status: 'N',
+    errors: [],
+    brokerName: '200 - Corretora 02',
+    brokerCode: '200',
+    treasureList: [],
   },
   {
-    "status": "N",
-    "errors": [],
-    "brokerName": "300 - Corretora 03",
-    "brokerCode": "300",
-    "treasureList": []
+    status: 'N',
+    errors: [],
+    brokerName: '300 - Corretora 03',
+    brokerCode: '300',
+    treasureList: [],
   },
-]
+];
 ```
 
 - brokerName = Nome da corretora;
@@ -668,15 +670,15 @@ Resultado:
 
 ## Treasure List
 
-| Propriedade         | Tipo     | Descrição                                                               |
-| ------------------- | -------- | ----------------------------------------------------------------------- |
-| **Title**           | _String_ | Título do tesouro direto.                                               |
-| **maturity**        | _String_ | Data de vencimento.                                                     |
-| **invested**        | _Number_ | Valor investido.                                                        |
-| **currentGross**    | _Number_ | Bruto total.                                                            |
-| **currentNet**      | _Number_ | Líquido atual.                                                          |
-| **total**           | _Number_ | Quatidade total comprado.                                               |
-| **blocked**         | _Number_ | Quantidade bloqueada.                                                   |
+| Propriedade      | Tipo     | Descrição                 |
+| ---------------- | -------- | ------------------------- |
+| **Title**        | _String_ | Título do tesouro direto. |
+| **maturity**     | _String_ | Data de vencimento.       |
+| **invested**     | _Number_ | Valor investido.          |
+| **currentGross** | _Number_ | Bruto total.              |
+| **currentNet**   | _Number_ | Líquido atual.            |
+| **total**        | _Number_ | Quatidade total comprado. |
+| **blocked**      | _Number_ | Quantidade bloqueada.     |
 
 ### 🛠 Tecnologias
 
@@ -702,3 +704,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 ## Licença
 
 MIT
+
+<a href = "https://github.com/Tanu-N-Prabhu/Python/graphs/contributors">
+</a>
